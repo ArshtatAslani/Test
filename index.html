@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Vazirmatn", sans-serif;
         }
         body {
             background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
@@ -18,8 +18,9 @@
             color: #1f2937;
             padding: 20px;
         }
-
         .hidden { display: none !important; }
+
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap');
 
         /* ────────────── انتخاب نقش ────────────── */
         .role-container {
@@ -60,26 +61,43 @@
 
         /* ────────────── لاگین ────────────── */
         .login-container {
-            max-width: 420px;
-            margin: 40px auto;
+            max-width: 480px;
+            margin: 60px auto;
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
             overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .login-header {
+            background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+            color: white;
+            padding: 32px 24px;
+            text-align: center;
+        }
+        .login-header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 0.5px;
+            color: #f0fdf4;
+        }
+        .login-form {
+            padding: 40px 36px;
         }
         .login-form .input-group {
-            margin-bottom: 24px;
+            margin-bottom: 28px;
             position: relative;
         }
         .login-form label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 600;
             color: #065f46;
         }
         .login-form input {
             width: 100%;
-            padding: 14px 16px 14px 52px;
+            padding: 15px 16px 15px 54px;
             border: 1px solid #a7f3d0;
             border-radius: 12px;
             font-size: 1.05rem;
@@ -91,10 +109,10 @@
         }
         .login-form i {
             position: absolute;
-            left: 18px;
-            top: 42px;
+            left: 20px;
+            top: 50px;
             color: #047857;
-            font-size: 1.25rem;
+            font-size: 1.3rem;
         }
         .login-btn {
             width: 100%;
@@ -111,27 +129,36 @@
         .error-msg {
             color: #dc2626;
             font-size: 0.95rem;
-            margin-top: 8px;
+            margin-top: 10px;
             text-align: center;
             display: none;
         }
 
-        /* دکمه بازگشت */
-        .back-btn {
+        /* دکمه بازگشت آیکونی کوچک در هدر */
+        .icon-back-btn {
             position: absolute;
-            top: 20px;
+            top: 18px;
             right: 24px;
-            background: rgba(255,255,255,0.9);
-            border: 1px solid #d1d5db;
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-weight: 500;
+            background: rgba(255,255,255,0.18);
+            border: none;
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            font-size: 1.25rem;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
             z-index: 10;
         }
-        .back-btn:hover { background: white; }
+        .icon-back-btn:hover {
+            background: rgba(255,255,255,0.35);
+            transform: scale(1.08);
+        }
 
-        /* ────────────── داشبورد (عرضی) ────────────── */
+        /* ────────────── داشبورد ────────────── */
         .dashboard-wrapper {
             max-width: 1200px;
             margin: 20px auto;
@@ -179,11 +206,11 @@
             font-size: 1.2rem;
         }
         .table-wrapper {
-            max-height: 580px;
-            overflow-y: auto;
-            margin: 0 32px 32px;
+            margin: 0 32px 32px 32px;
             border: 1px solid #e2e8f0;
             border-radius: 12px;
+            overflow: hidden;
+            border-top: none; /* باعث می‌شود عرض با هدر و فیلترها دقیقاً هم‌اندازه شود */
         }
         table {
             width: 100%;
@@ -214,10 +241,10 @@
             font-weight: 500;
         }
         .status-شروع_شیفت { background: #d1fae5; color: #065f46; }
-        .status-پایان_شیفت  { background: #fef3c7; color: #92400e; }
-        .status-ثبت_حضور   { background: #dbeafe; color: #1e40af; }
+        .status-پایان_شیفت { background: #fef3c7; color: #92400e; }
+        .status-ثبت_حضور { background: #dbeafe; color: #1e40af; }
 
-        /* استایل‌های اصلی پروموتر (دقیقاً همان چیزی که فرستادی) */
+        /* ────────────── پروموتر ────────────── */
         .promoter-container {
             background: white;
             width: 100%;
@@ -226,6 +253,7 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             overflow: hidden;
             margin: 0 auto;
+            position: relative;
         }
         .promoter-header {
             background: #047857;
@@ -367,7 +395,6 @@
             border-bottom: 1px solid #a7f3d0;
         }
         .location-item:last-child { border-bottom: none; }
-
         @media (max-width: 480px) {
             .promoter-content { padding: 16px; }
             .promoter-header h1 { font-size: 1.4rem; }
@@ -398,11 +425,13 @@
 
 <!-- لاگین کارشناسان -->
 <div id="login-page" class="login-container hidden">
-    <button class="back-btn" onclick="showRoleSelection()">بازگشت</button>
-    <div class="header">
+    <button class="icon-back-btn" onclick="showRoleSelection()">
+        <i class="fas fa-arrow-right"></i>
+    </button>
+    <div class="login-header">
         <h1>ورود کارشناسان</h1>
     </div>
-    <div class="content login-form">
+    <div class="login-form">
         <div class="input-group">
             <label for="username">نام کاربری</label>
             <i class="fas fa-user"></i>
@@ -418,10 +447,11 @@
     </div>
 </div>
 
-<!-- پروموتر - دقیقاً همان HTML و ساختار شما -->
+<!-- پروموتر -->
 <div id="promoter-page" class="hidden">
-    <button class="back-btn" onclick="showRoleSelection()">بازگشت به انتخاب نقش</button>
-
+    <button class="icon-back-btn" onclick="showRoleSelection()" style="background:rgba(4,120,87,0.12); color:#065f46;">
+        <i class="fas fa-arrow-right"></i>
+    </button>
     <div class="promoter-container">
         <div class="system-disabled-overlay" id="system-disabled-overlay">
             <i class="fas fa-power-off fa-3x" style="color:#991b1b; margin-bottom:16px;"></i>
@@ -484,7 +514,7 @@
                 <div class="location-item"><span>عرض جغرافیایی:</span><span id="latitude-value">---</span></div>
                 <div class="location-item"><span>طول جغرافیایی:</span><span id="longitude-value">---</span></div>
                 <div class="location-item"><span>دقت موقعیت:</span><span id="accuracy-value">---</span></div>
-                <button id="get-location-btn" class="btn btn-tertiary">دریافت موقعیت</button>
+                <button id="get-location-btn" class="btn-tertiary">دریافت موقعیت</button>
             </div>
             <button id="submit-btn" class="submit-btn" disabled>ارسال اطلاعات</button>
             <div id="status-message" class="status-message"></div>
@@ -497,12 +527,12 @@
 
 <!-- داشبورد -->
 <div id="dashboard-page" class="hidden dashboard-wrapper">
-    <button class="back-btn" onclick="showRoleSelection()">بازگشت به انتخاب نقش</button>
-
+    <button class="icon-back-btn" onclick="showRoleSelection()" style="background:rgba(4,120,87,0.08); color:#065f46;">
+        <i class="fas fa-arrow-right"></i>
+    </button>
     <div class="dashboard-header">
         <h1>داشبورد کارشناسان فروش</h1>
     </div>
-
     <div class="filters">
         <div class="filter-group">
             <label for="filter-name">نام پروموتر</label>
@@ -525,7 +555,6 @@
             <input type="date" id="filter-date">
         </div>
     </div>
-
     <div class="table-wrapper">
         <table>
             <thead>
@@ -549,12 +578,10 @@ function showRoleSelection() {
     document.getElementById('promoter-page').classList.add('hidden');
     document.getElementById('dashboard-page').classList.add('hidden');
 }
-
 function showPromoterPage() {
     document.getElementById('role-selection').classList.add('hidden');
     document.getElementById('promoter-page').classList.remove('hidden');
 }
-
 function showLoginPage() {
     document.getElementById('role-selection').classList.add('hidden');
     document.getElementById('login-page').classList.remove('hidden');
@@ -562,7 +589,6 @@ function showLoginPage() {
     document.getElementById('username').value = '';
     document.getElementById('password').value = '';
 }
-
 function showDashboardPage() {
     document.getElementById('login-page').classList.add('hidden');
     document.getElementById('dashboard-page').classList.remove('hidden');
@@ -576,12 +602,10 @@ const users = {
     "admin": "admin",
     "SE": "12345"
 };
-
 document.getElementById('login-btn').addEventListener('click', () => {
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value.trim();
     const errorEl = document.getElementById('login-error');
-
     if (users[username] && users[username] === password) {
         showDashboardPage();
     } else {
@@ -590,7 +614,7 @@ document.getElementById('login-btn').addEventListener('click', () => {
     }
 });
 
-// ────────────── کد پروموتر (دقیقاً همان کد شما بدون تغییر) ──────────────
+// ────────────── کد پروموتر (کامل و بدون حذف) ──────────────
 const marketingCodeInput = document.getElementById('marketing-code');
 const marketingCodeError = document.getElementById('marketing-code-error');
 const requestTypeSelect = document.getElementById('request-type');
@@ -609,11 +633,12 @@ const timeRestrictionInfo = document.getElementById('time-restriction');
 const systemDisabledOverlay = document.getElementById('system-disabled-overlay');
 const systemStatus = document.getElementById('system-status');
 const systemClock = document.getElementById('system-clock');
+
 let locationData = null;
 let spots = [];
 let selectedSpot = null;
 let selectedRequestType = null;
-let debounceTimeout;
+
 const allowedTimeSlots = [
     { start: { h:6, m:0 }, end: { h:6, m:30 } },
     { start: { h:8, m:0 }, end: { h:8, m:30 } },
@@ -630,11 +655,13 @@ function updateClock() {
     const n = new Date();
     systemClock.textContent = `${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}:${n.getSeconds().toString().padStart(2,'0')}`;
 }
+
 function isInDisabledTime() {
     const n = new Date();
     const m = n.getHours() * 60 + n.getMinutes();
     return m >= 30 && m < 330;
 }
+
 function isWithinAllowedTime() {
     const n = new Date();
     const m = n.getHours() * 60 + n.getMinutes();
@@ -645,9 +672,11 @@ function isWithinAllowedTime() {
     }
     return false;
 }
+
 function validateMarketingCode(code) {
     return /^\d{5}$/.test(code);
 }
+
 function calculateDistance(lat1, lon1, lat2, lon2) {
     const R = 6371e3;
     const φ1 = lat1 * Math.PI/180;
@@ -658,6 +687,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     return R * c;
 }
+
 async function fetchSpots(code) {
     try {
         const url = `https://script.google.com/macros/s/AKfycbwnHxuCeQrHBVHpT253b23qgG0jtf-_u8JZ4nORAqjBSfnb6rPVJzPTLJblnLtLltOT/exec?code=${code}`;
@@ -682,6 +712,7 @@ async function fetchSpots(code) {
         showStatus('خطا در بارگیری اسپات‌ها', 'error');
     }
 }
+
 function getLocation() {
     if (!navigator.geolocation) {
         showStatus('مرورگر شما موقعیت‌یابی را پشتیبانی نمی‌کند', 'error');
@@ -710,12 +741,14 @@ function getLocation() {
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
 }
+
 function showStatus(msg, cls) {
     statusMessage.textContent = msg;
     statusMessage.className = 'status-message ' + cls;
     statusMessage.style.display = 'block';
     setTimeout(() => { statusMessage.style.display = 'none'; }, 5000);
 }
+
 function validateForm() {
     const code = marketingCodeInput.value.trim();
     const validCode = validateMarketingCode(code);
@@ -723,14 +756,17 @@ function validateForm() {
     const hasType = requestTypeSelect.value !== '';
     const hasSpot = !!selectedSpot;
     const sameType = requestTypeSelect.value === selectedRequestType;
+
     if (code && !validCode) {
         marketingCodeError.textContent = 'کد باید دقیقاً ۵ رقم باشد';
         marketingCodeError.style.display = 'block';
     } else {
         marketingCodeError.style.display = 'none';
     }
+
     submitBtn.disabled = !(validCode && hasLoc && hasType && hasSpot && sameType);
 }
+
 marketingCodeInput.addEventListener('input', function() {
     this.value = this.value.replace(/\D/g,'').slice(0,5);
     const code = this.value.trim();
@@ -744,6 +780,7 @@ marketingCodeInput.addEventListener('input', function() {
     }
     validateForm();
 });
+
 requestTypeSelect.addEventListener('change', function() {
     selectedRequestType = this.value;
     locationData = null;
@@ -753,6 +790,7 @@ requestTypeSelect.addEventListener('change', function() {
     timeRestrictionInfo.style.display = (this.value === 'ثبت حضور') ? 'block' : 'none';
     validateForm();
 });
+
 spotSelect.addEventListener('change', function() {
     const idx = this.value;
     selectedSpot = idx ? spots[idx] : null;
@@ -765,7 +803,9 @@ spotSelect.addEventListener('change', function() {
     }
     validateForm();
 });
+
 getLocationBtn.addEventListener('click', getLocation);
+
 submitBtn.addEventListener('click', async () => {
     const code = marketingCodeInput.value.trim();
     if (!validateMarketingCode(code)) return;
@@ -794,8 +834,10 @@ submitBtn.addEventListener('click', async () => {
             return;
         }
     }
+
     showStatus('در حال ارسال...', 'processing');
     submitBtn.disabled = true;
+
     try {
         const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdY70VGHakFIzh9zjWbfZ2T-tBqUg3xtNEZwG4drNpjnbwrjg/formResponse';
         const data = new URLSearchParams();
@@ -806,6 +848,7 @@ submitBtn.addEventListener('click', async () => {
         data.append('entry.1723693542', requestTypeSelect.value);
         await fetch(formUrl, { method: 'POST', body: data, mode: 'no-cors' });
         showStatus('اطلاعات با موفقیت ثبت شد', 'success');
+
         setTimeout(() => {
             marketingCodeInput.value = '';
             requestTypeSelect.value = '';
@@ -823,8 +866,10 @@ submitBtn.addEventListener('click', async () => {
         submitBtn.disabled = false;
     }
 });
+
 setInterval(updateClock, 1000);
 updateClock();
+
 function checkSystemState() {
     const disabled = isInDisabledTime();
     systemDisabledOverlay.style.display = disabled ? 'flex' : 'none';
@@ -850,7 +895,6 @@ const sampleData = [
     { name: "سارا احمدی", date: "۱۴۰۴/۱۱/۰۲", time: "۰۶:۱۸:۳۰", type: "شروع شیفت" },
     { name: "محمد رضایی", date: "۱۴۰۴/۱۱/۰۱", time: "۲۰:۴۵:۱۲", type: "پایان شیفت" },
 ];
-
 const tbody = document.getElementById('data-body');
 const filterName = document.getElementById('filter-name');
 const filterType = document.getElementById('filter-type');
@@ -883,7 +927,6 @@ function applyFilters() {
 filterName.addEventListener('input', applyFilters);
 filterType.addEventListener('change', applyFilters);
 filterDate.addEventListener('change', applyFilters);
-
 renderTable(sampleData);
 </script>
 </body>
