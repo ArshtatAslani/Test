@@ -21,7 +21,7 @@
 
         .hidden { display: none !important; }
 
-        /* انتخاب نقش */
+        /* ────────────── انتخاب نقش ────────────── */
         .role-container {
             max-width: 520px;
             margin: 40px auto;
@@ -58,7 +58,7 @@
         .role-card h2 { font-size: 1.35rem; margin: 12px 0 8px; color: #065f46; }
         .role-card p { color: #4b5563; font-size: 0.98rem; }
 
-        /* لاگین */
+        /* ────────────── لاگین ────────────── */
         .login-container {
             max-width: 420px;
             margin: 40px auto;
@@ -131,7 +131,7 @@
         }
         .back-btn:hover { background: white; }
 
-        /* داشبورد - عرضی */
+        /* ────────────── داشبورد (عرضی) ────────────── */
         .dashboard-wrapper {
             max-width: 1200px;
             margin: 20px auto;
@@ -217,7 +217,7 @@
         .status-پایان_شیفت  { background: #fef3c7; color: #92400e; }
         .status-ثبت_حضور   { background: #dbeafe; color: #1e40af; }
 
-        /* استایل‌های اصلی پروموتر (کپی دقیق) */
+        /* استایل‌های اصلی پروموتر (دقیقاً همان چیزی که فرستادی) */
         .promoter-container {
             background: white;
             width: 100%;
@@ -418,7 +418,7 @@
     </div>
 </div>
 
-<!-- پروموتر - دقیقاً همان کد شما -->
+<!-- پروموتر - دقیقاً همان HTML و ساختار شما -->
 <div id="promoter-page" class="hidden">
     <button class="back-btn" onclick="showRoleSelection()">بازگشت به انتخاب نقش</button>
 
@@ -590,7 +590,7 @@ document.getElementById('login-btn').addEventListener('click', () => {
     }
 });
 
-// کد پروموتر شما - بدون کوچک‌ترین تغییر
+// ────────────── کد پروموتر (دقیقاً همان کد شما بدون تغییر) ──────────────
 const marketingCodeInput = document.getElementById('marketing-code');
 const marketingCodeError = document.getElementById('marketing-code-error');
 const requestTypeSelect = document.getElementById('request-type');
@@ -606,7 +606,7 @@ const longitudeValue = document.getElementById('longitude-value');
 const accuracyValue = document.getElementById('accuracy-value');
 const getLocationBtn = document.getElementById('get-location-btn');
 const timeRestrictionInfo = document.getElementById('time-restriction');
-const systemDisabledOverlay= document.getElementById('system-disabled-overlay');
+const systemDisabledOverlay = document.getElementById('system-disabled-overlay');
 const systemStatus = document.getElementById('system-status');
 const systemClock = document.getElementById('system-clock');
 let locationData = null;
