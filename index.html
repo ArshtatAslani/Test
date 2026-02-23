@@ -964,13 +964,20 @@ function renderTable(data) {
     }
 
     data.forEach(item => {
+        // اصلاح نمایش تاریخ → فرمت میلادی خوانا (YYYY-MM-DD)
+        let displayDate = item.date || '—';
+        if (displayDate && displayDate.includes('-')) {
+            // اگر تاریخ به صورت ISO یا مشابه است → فقط YYYY-MM-DD نگه می‌داریم
+            displayDate = displayDate.split('T')[0].split(' ')[0];
+        }
+
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${item.name     || '—'}</td>
+            <td>${item.name || '—'}</td>
             <td>${item.province || '—'}</td>
-            <td>${item.se       || '—'}</td>
-            <td>${item.date     || '—'}</td>
-            <td>${item.time     || '—'}</td>
+            <td>${item.se || '—'}</td>
+            <td>${displayDate}</td>
+            <td>${item.time || '—'}</td>
             <td><span class="status-badge status-${(item.type || '').replace(/\s/g, '_')}">${item.type || '—'}</span></td>
         `;
         tbody.appendChild(tr);
