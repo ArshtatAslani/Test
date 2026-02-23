@@ -151,29 +151,32 @@
             background: white;
         }
 
-        /* داشبورد */
+        /* داشبورد - نمای عرضی (عرض بیشتر) */
         .dashboard-container {
-            max-width: 1280px;
+            max-width: 1200px;
             margin: 20px auto;
         }
         .dashboard-header {
             background: linear-gradient(135deg, #047857, #065f46);
             color: white;
-            padding: 32px 40px;
+            padding: 28px 32px;
             text-align: center;
         }
         .dashboard-header h1 {
-            font-size: 2rem;
+            font-size: 1.9rem;
+            margin: 0;
         }
         .filters {
-            padding: 28px 40px;
+            padding: 24px 32px;
             background: #f8fafc;
             border-bottom: 1px solid #e2e8f0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
         }
         .filter-group {
+            flex: 1;
+            min-width: 220px;
             position: relative;
         }
         .filter-group label {
@@ -198,9 +201,9 @@
             font-size: 1.2rem;
         }
         .table-wrapper {
-            max-height: 620px;
+            max-height: 580px;
             overflow-y: auto;
-            margin: 0 40px 40px;
+            margin: 0 32px 32px;
             border: 1px solid #e2e8f0;
             border-radius: 12px;
         }
@@ -237,9 +240,15 @@
         .status-ثبت حضور   { background: #dbeafe; color: #1e40af; }
 
         @media (max-width: 768px) {
-            .filters { grid-template-columns: 1fr; }
-            .dashboard-header h1 { font-size: 1.7rem; }
-            .table-wrapper { margin: 0 20px 30px; }
+            .filters {
+                flex-direction: column;
+            }
+            .dashboard-container {
+                margin: 16px;
+            }
+            .table-wrapper {
+                margin: 0 16px 24px;
+            }
         }
     </style>
 </head>
@@ -275,7 +284,7 @@
         <div class="input-group">
             <label for="username">نام کاربری</label>
             <i class="fas fa-user"></i>
-            <input type="text" id="username" placeholder="admin یا SE" autocomplete="off">
+            <input type="text" id="username" placeholder="••••••••" autocomplete="off">
         </div>
         <div class="input-group">
             <label for="password">رمز عبور</label>
@@ -289,7 +298,7 @@
 
 <!-- صفحه پروموترها -->
 <div id="promoter-page" class="hidden">
-    <button class="back-btn" onclick="showRoleSelection()">بازگشت به انتخاب نقش</button>
+    <button class="back-btn" onclick="showRoleSelection()">بازگشت</button>
 
     <div class="main-container">
         <div class="system-disabled-overlay" id="system-disabled-overlay">
@@ -300,7 +309,6 @@
             <h1>سامانه حضور و غیاب - پروموترها</h1>
         </div>
         <div class="content">
-            <!-- دقیقاً همان محتوای اصلی پروموترها که قبلاً فرستادی -->
             <div class="system-status active" id="system-status">
                 <i class="fas fa-clock"></i>
                 <span>ساعت سیستم:</span>
@@ -365,9 +373,9 @@
     </div>
 </div>
 
-<!-- داشبورد کارشناسان -->
+<!-- داشبورد کارشناسان - نمای عرضی -->
 <div id="dashboard-page" class="hidden dashboard-container">
-    <button class="back-btn" onclick="showRoleSelection()">بازگشت به انتخاب نقش</button>
+    <button class="back-btn" onclick="showRoleSelection()">بازگشت</button>
 
     <div class="main-container">
         <div class="dashboard-header">
@@ -440,11 +448,10 @@ function showDashboardPage() {
     document.getElementById('dashboard-page').classList.remove('hidden');
 }
 
-// رویداد کلیک کارت‌ها
 document.getElementById('promoter-role').addEventListener('click', showPromoterPage);
 document.getElementById('expert-role').addEventListener('click', showLoginPage);
 
-// ------------------- لاگین ساده -------------------
+// ------------------- لاگین -------------------
 const users = {
     "admin": "admin",
     "SE": "12345"
@@ -463,7 +470,7 @@ document.getElementById('login-btn').addEventListener('click', () => {
     }
 });
 
-// ------------------- کد پروموترها (کاملاً بدون تغییر) -------------------
+// ------------------- پروموترها (کامل بدون تغییر) -------------------
 const marketingCodeInput = document.getElementById('marketing-code');
 const marketingCodeError = document.getElementById('marketing-code-error');
 const requestTypeSelect = document.getElementById('request-type');
@@ -616,7 +623,6 @@ function validateForm() {
     submitBtn.disabled = !(validCode && hasLoc && hasType && hasSpot && sameType);
 }
 
-// بقیه event listener های پروموترها ...
 marketingCodeInput.addEventListener('input', function() {
     this.value = this.value.replace(/\D/g,'').slice(0,5);
     const code = this.value.trim();
@@ -671,7 +677,12 @@ submitBtn.addEventListener('click', async () => {
         return;
     }
     if (selectedSpot) {
-        const dist = calculateDistance(locationData.latitude, locationData.longitude, selectedSpot.lat, selectedSpot.long);
+        const dist = calculateDistance(
+            locationData.latitude,
+            locationData.longitude,
+            selectedSpot.lat,
+            selectedSpot.long
+        );
         if (dist > 500) {
             showStatus('شما در محدوده این اسپات نیستید (بیش از ۵۰۰ متر)', 'error');
             return;
@@ -734,6 +745,7 @@ const sampleData = [
     { name: "علی محمدی", date: "۱۴۰۴/۱۱/۰۲", time: "۰۸:۱۲:۴۵", type: "ثبت حضور" },
     { name: "سارا احمدی", date: "۱۴۰۴/۱۱/۰۲", time: "۰۶:۱۸:۳۰", type: "شروع شیفت" },
     { name: "محمد رضایی", date: "۱۴۰۴/۱۱/۰۱", time: "۲۰:۴۵:۱۲", type: "پایان شیفت" },
+    { name: "زهرا کریمی", date: "۱۴۰۴/۱۱/۰۲", time: "۱۲:۰۵:۲۲", type: "ثبت حضور" },
 ];
 
 const tbody = document.getElementById('data-body');
@@ -749,19 +761,30 @@ function renderTable(data) {
             <td>${item.name}</td>
             <td>${item.date}</td>
             <td>${item.time}</td>
-            <td><span class="status-badge status-${item.type}">${item.type}</span></td>
+            <td><span class="status-badge status-${item.type.replace(/\s/g, '')}">${item.type}</span></td>
         `;
         tbody.appendChild(tr);
     });
 }
 
 function applyFilters() {
-    let filtered = sampleData.filter(item => {
-        const nameMatch = !filterName.value.trim() || item.name.includes(filterName.value.trim());
-        const typeMatch = !filterType.value || item.type === filterType.value;
-        const dateMatch = !filterDate.value || item.date === filterDate.value;
-        return nameMatch && typeMatch && dateMatch;
-    });
+    let filtered = [...sampleData];
+
+    const nameVal = filterName.value.trim().toLowerCase();
+    const typeVal = filterType.value;
+    const dateVal = filterDate.value;
+
+    if (nameVal) {
+        filtered = filtered.filter(item => item.name.toLowerCase().includes(nameVal));
+    }
+    if (typeVal) {
+        filtered = filtered.filter(item => item.type === typeVal);
+    }
+    if (dateVal) {
+        const formattedDate = new Date(dateVal).toLocaleDateString('fa-IR');
+        filtered = filtered.filter(item => item.date === formattedDate);
+    }
+
     renderTable(filtered);
 }
 
