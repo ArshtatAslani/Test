@@ -19,9 +19,7 @@
             padding: 20px;
         }
         .hidden { display: none !important; }
-
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap');
-
         /* ────────────── انتخاب نقش ────────────── */
         .role-container {
             max-width: 520px;
@@ -58,7 +56,6 @@
         .role-card i { font-size: 3.2rem; color: #047857; margin-bottom: 16px; }
         .role-card h2 { font-size: 1.35rem; margin: 12px 0 8px; color: #065f46; }
         .role-card p { color: #4b5563; font-size: 0.98rem; }
-
         /* ────────────── لاگین ────────────── */
         .login-container {
             max-width: 480px;
@@ -133,7 +130,6 @@
             text-align: center;
             display: none;
         }
-
         /* دکمه بازگشت آیکونی کوچک در هدر */
         .icon-back-btn {
             position: absolute;
@@ -157,23 +153,21 @@
             background: rgba(255,255,255,0.35);
             transform: scale(1.08);
         }
-
         /* ────────────── داشبورد ────────────── */
        .dashboard-wrapper {
     max-width: 1200px;
-    margin: 40px auto;               /* کمی فاصله بیشتر از بالا */
+    margin: 40px auto;
     background: white;
     border-radius: 16px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.12);
     overflow: hidden;
-    border: 1px solid #e2e8f0;      /* حاشیه بیرونی کل بخش */
+    border: 1px solid #e2e8f0;
 }
       .dashboard-header {
     background: linear-gradient(135deg, #047857, #065f46);
     color: white;
     padding: 28px 32px;
     text-align: center;
-    /* بدون border-radius اینجا، چون کل wrapper گرد است */
 }
         .dashboard-header h1 { font-size: 1.9rem; margin: 0; }
        .filters {
@@ -210,12 +204,11 @@
             color: #047857;
             font-size: 1.2rem;
         }
-        /* اصلاح اصلی برای اسکرول افقی در موبایل */
         .table-wrapper {
             width: 100%;
-            overflow-x: auto;           /* مهم‌ترین تغییر */
-            -webkit-overflow-scrolling: touch; /* اسکرول نرم‌تر در iOS */
-            padding-bottom: 12px;       /* جلوگیری از قطع شدن سایه/اسکرول‌بار */
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 12px;
         }
         table {
             width: 100%;
@@ -248,7 +241,6 @@
         .status-شروع_شیفت { background: #d1fae5; color: #065f46; }
         .status-پایان_شیفت { background: #fef3c7; color: #92400e; }
         .status-ثبت_حضور { background: #dbeafe; color: #1e40af; }
-
         /* ────────────── پروموتر ────────────── */
         .promoter-container {
             background: white;
@@ -576,17 +568,19 @@
 </div>
 
 <script>
-// مدیریت صفحات
+// ────────────── مدیریت صفحات ──────────────
 function showRoleSelection() {
     document.getElementById('role-selection').classList.remove('hidden');
     document.getElementById('login-page').classList.add('hidden');
     document.getElementById('promoter-page').classList.add('hidden');
     document.getElementById('dashboard-page').classList.add('hidden');
 }
+
 function showPromoterPage() {
     document.getElementById('role-selection').classList.add('hidden');
     document.getElementById('promoter-page').classList.remove('hidden');
 }
+
 function showLoginPage() {
     document.getElementById('role-selection').classList.add('hidden');
     document.getElementById('login-page').classList.remove('hidden');
@@ -594,23 +588,31 @@ function showLoginPage() {
     document.getElementById('username').value = '';
     document.getElementById('password').value = '';
 }
+
 function showDashboardPage() {
     document.getElementById('login-page').classList.add('hidden');
     document.getElementById('dashboard-page').classList.remove('hidden');
+    
+    // بارگذاری داده‌ها وقتی داشبورد باز می‌شود (فقط اگر هنوز لود نشده باشد)
+    if (allData.length === 0) {
+        loadDashboardData();
+    }
 }
 
 document.getElementById('promoter-role').addEventListener('click', showPromoterPage);
 document.getElementById('expert-role').addEventListener('click', showLoginPage);
 
-// لاگین
+// ────────────── لاگین ──────────────
 const users = {
     "admin": "admin",
     "SE": "12345"
 };
+
 document.getElementById('login-btn').addEventListener('click', () => {
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value.trim();
     const errorEl = document.getElementById('login-error');
+
     if (users[username] && users[username] === password) {
         showDashboardPage();
     } else {
@@ -619,7 +621,7 @@ document.getElementById('login-btn').addEventListener('click', () => {
     }
 });
 
-// ────────────── کد پروموتر (کامل و بدون حذف) ──────────────
+// ────────────── کد پروموتر (کامل و بدون تغییر) ──────────────
 const marketingCodeInput = document.getElementById('marketing-code');
 const marketingCodeError = document.getElementById('marketing-code-error');
 const requestTypeSelect = document.getElementById('request-type');
@@ -851,7 +853,9 @@ submitBtn.addEventListener('click', async () => {
         data.append('entry.1314182104', locationData.longitude);
         data.append('entry.1995166577', locationData.accuracy);
         data.append('entry.1723693542', requestTypeSelect.value);
+
         await fetch(formUrl, { method: 'POST', body: data, mode: 'no-cors' });
+
         showStatus('اطلاعات با موفقیت ثبت شد', 'success');
 
         setTimeout(() => {
@@ -879,6 +883,7 @@ function checkSystemState() {
     const disabled = isInDisabledTime();
     systemDisabledOverlay.style.display = disabled ? 'flex' : 'none';
     systemStatus.className = 'system-status ' + (disabled ? 'inactive' : 'active');
+
     if (disabled) {
         marketingCodeInput.disabled = true;
         requestTypeSelect.disabled = true;
@@ -891,48 +896,89 @@ function checkSystemState() {
         validateForm();
     }
 }
+
 checkSystemState();
 setInterval(checkSystemState, 60000);
 
-// داشبورد نمونه
-const sampleData = [
-    { name: "علی محمدی", date: "۱۴۰۴/۱۱/۰۲", time: "۰۸:۱۲:۴۵", type: "ثبت حضور" },
-    { name: "سارا احمدی", date: "۱۴۰۴/۱۱/۰۲", time: "۰۶:۱۸:۳۰", type: "شروع شیفت" },
-    { name: "محمد رضایی", date: "۱۴۰۴/۱۱/۰۱", time: "۲۰:۴۵:۱۲", type: "پایان شیفت" },
-];
+// ────────────── داشبورد – فراخوانی واقعی داده‌ها ──────────────
+
+// !!! اینجا آدرس Web App واقعی خودتان را بگذارید !!!
+const DASHBOARD_API_URL = "https://script.google.com/macros/s/AKfycby96IfCf3zORtNCkgcd3aZ3hoH2nJFqfMX0jDuo75NU2e01hhSHRrUJloSpKwniTpMU2w/exec";
+
 const tbody = document.getElementById('data-body');
 const filterName = document.getElementById('filter-name');
 const filterType = document.getElementById('filter-type');
 const filterDate = document.getElementById('filter-date');
 
+let allData = [];
+
+async function loadDashboardData() {
+    try {
+        const res = await fetch(DASHBOARD_API_URL);
+        const json = await res.json();
+
+        if (!json.success) {
+            tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#991b1b;">
+                خطا: ${json.message || 'داده دریافت نشد'}</td></tr>`;
+            return;
+        }
+
+        allData = json.data || [];
+        applyFilters();
+
+    } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#991b1b;">
+            خطا در ارتباط با سرور: ${err.message}</td></tr>`;
+    }
+}
+
 function renderTable(data) {
     tbody.innerHTML = '';
+    if (data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#6b7280;">داده‌ای یافت نشد</td></tr>';
+        return;
+    }
+
     data.forEach(item => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${item.name}</td>
-            <td>${item.date}</td>
-            <td>${item.time}</td>
-            <td><span class="status-badge status-${item.type.replace(/\s/g, '_')}">${item.type}</span></td>
+            <td>${item.name || '—'}</td>
+            <td>${item.date || '—'}</td>
+            <td>${item.time || '—'}</td>
+            <td><span class="status-badge status-${(item.type || '').replace(/\s/g, '_')}">${item.type || '—'}</span></td>
         `;
         tbody.appendChild(tr);
     });
 }
 
 function applyFilters() {
-    let filtered = sampleData.filter(item => {
-        const nameMatch = !filterName.value.trim() || item.name.toLowerCase().includes(filterName.value.trim().toLowerCase());
+    let filtered = allData.filter(item => {
+        const nameMatch = !filterName.value.trim() || 
+            (item.name || '').toLowerCase().includes(filterName.value.trim().toLowerCase());
+        
         const typeMatch = !filterType.value || item.type === filterType.value;
-        const dateMatch = !filterDate.value || item.date === new Date(filterDate.value).toLocaleDateString('fa-IR');
+        
+        let dateMatch = true;
+        if (filterDate.value) {
+            const inputDate = new Date(filterDate.value).toLocaleDateString('fa-IR');
+            dateMatch = (item.date || '') === inputDate;
+        }
+
         return nameMatch && typeMatch && dateMatch;
     });
+
     renderTable(filtered);
 }
 
 filterName.addEventListener('input', applyFilters);
 filterType.addEventListener('change', applyFilters);
 filterDate.addEventListener('change', applyFilters);
-renderTable(sampleData);
+
+// اگر داشبورد از قبل باز بود (برای تست)
+if (!document.getElementById('dashboard-page').classList.contains('hidden')) {
+    loadDashboardData();
+}
+
 </script>
 </body>
 </html>
