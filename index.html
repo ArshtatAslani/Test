@@ -210,12 +210,13 @@
             color: #047857;
             font-size: 1.2rem;
         }
+        /* اصلاح اصلی برای اسکرول افقی در موبایل */
         .table-wrapper {
-    margin: 0;
-    border: none;                    /* حذف حاشیه اضافی */
-    border-radius: 0;
-    overflow: hidden;
-}
+            width: 100%;
+            overflow-x: auto;           /* مهم‌ترین تغییر */
+            -webkit-overflow-scrolling: touch; /* اسکرول نرم‌تر در iOS */
+            padding-bottom: 12px;       /* جلوگیری از قطع شدن سایه/اسکرول‌بار */
+        }
         table {
             width: 100%;
             border-collapse: collapse;
