@@ -21,7 +21,8 @@
 
         .hidden { display: none !important; }
 
-        .main-container {
+        /* صفحه انتخاب نقش - حرفه‌ای */
+        .role-container {
             max-width: 520px;
             margin: 40px auto;
             background: white;
@@ -29,28 +30,25 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.12);
             overflow: hidden;
         }
-
-        .header {
+        .role-header {
             background: linear-gradient(135deg, #047857 0%, #065f46 100%);
             color: white;
             padding: 32px 24px;
             text-align: center;
         }
-        .header h1 {
+        .role-header h1 {
             font-size: 1.85rem;
             font-weight: 600;
             margin: 0;
         }
-        .header p {
+        .role-header p {
             margin-top: 8px;
             opacity: 0.9;
             font-size: 1.05rem;
         }
-
-        .content {
+        .role-content {
             padding: 32px 28px;
         }
-
         .role-card {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
@@ -82,6 +80,10 @@
         }
 
         /* لاگین */
+        .login-container {
+            max-width: 420px;
+            margin: 40px auto;
+        }
         .login-form .input-group {
             margin-bottom: 24px;
             position: relative;
@@ -121,11 +123,8 @@
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            margin-top: 12px;
         }
-        .login-btn:hover {
-            background: #065f46;
-        }
+        .login-btn:hover { background: #065f46; }
         .error-msg {
             color: #dc2626;
             font-size: 0.95rem;
@@ -147,12 +146,10 @@
             cursor: pointer;
             z-index: 10;
         }
-        .back-btn:hover {
-            background: white;
-        }
+        .back-btn:hover { background: white; }
 
         /* داشبورد - نمای عرضی (عرض بیشتر) */
-        .dashboard-container {
+        .dashboard-wrapper {
             max-width: 1200px;
             margin: 20px auto;
         }
@@ -161,6 +158,7 @@
             color: white;
             padding: 28px 32px;
             text-align: center;
+            border-radius: 16px 16px 0 0;
         }
         .dashboard-header h1 {
             font-size: 1.9rem;
@@ -235,32 +233,26 @@
             font-size: 0.88rem;
             font-weight: 500;
         }
-        .status-شروع شیفت { background: #d1fae5; color: #065f46; }
-        .status-پایان شیفت  { background: #fef3c7; color: #92400e; }
-        .status-ثبت حضور   { background: #dbeafe; color: #1e40af; }
+        .status-شروع_شیفت { background: #d1fae5; color: #065f46; }
+        .status-پایان_شیفت  { background: #fef3c7; color: #92400e; }
+        .status-ثبت_حضور   { background: #dbeafe; color: #1e40af; }
 
         @media (max-width: 768px) {
-            .filters {
-                flex-direction: column;
-            }
-            .dashboard-container {
-                margin: 16px;
-            }
-            .table-wrapper {
-                margin: 0 16px 24px;
-            }
+            .filters { flex-direction: column; }
+            .dashboard-wrapper { margin: 16px; }
+            .table-wrapper { margin: 0 16px 24px; }
         }
     </style>
 </head>
 <body>
 
 <!-- صفحه انتخاب نقش -->
-<div id="role-selection" class="main-container">
-    <div class="header">
+<div id="role-selection" class="role-container">
+    <div class="role-header">
         <h1>سامانه حضور و غیاب</h1>
         <p>لطفاً نقش خود را انتخاب کنید</p>
     </div>
-    <div class="content">
+    <div class="role-content">
         <div class="role-card" id="promoter-role">
             <i class="fas fa-users"></i>
             <h2>پروموترها</h2>
@@ -275,7 +267,7 @@
 </div>
 
 <!-- صفحه لاگین کارشناسان -->
-<div id="login-page" class="main-container hidden">
+<div id="login-page" class="login-container hidden">
     <button class="back-btn" onclick="showRoleSelection()">بازگشت</button>
     <div class="header">
         <h1>ورود کارشناسان</h1>
@@ -284,7 +276,7 @@
         <div class="input-group">
             <label for="username">نام کاربری</label>
             <i class="fas fa-user"></i>
-            <input type="text" id="username" placeholder="••••••••" autocomplete="off">
+            <input type="text" id="username" placeholder="admin یا SE" autocomplete="off">
         </div>
         <div class="input-group">
             <label for="password">رمز عبور</label>
@@ -296,17 +288,17 @@
     </div>
 </div>
 
-<!-- صفحه پروموترها -->
+<!-- صفحه پروموترها - دقیقاً همان کد شما بدون هیچ تغییری -->
 <div id="promoter-page" class="hidden">
-    <button class="back-btn" onclick="showRoleSelection()">بازگشت</button>
+    <button class="back-btn" onclick="showRoleSelection()">بازگشت به انتخاب نقش</button>
 
-    <div class="main-container">
+    <div class="container">
         <div class="system-disabled-overlay" id="system-disabled-overlay">
             <i class="fas fa-power-off fa-3x" style="color:#991b1b; margin-bottom:16px;"></i>
             <p style="font-size:1.1rem; font-weight:600;">سامانه از ساعت ۰۰:۳۰ تا ۰۵:۳۰ غیرفعال است</p>
         </div>
         <div class="header">
-            <h1>سامانه حضور و غیاب - پروموترها</h1>
+            <h1>سامانه حضور و غیاب</h1>
         </div>
         <div class="content">
             <div class="system-status active" id="system-status">
@@ -362,7 +354,7 @@
                 <div class="location-item"><span>عرض جغرافیایی:</span><span id="latitude-value">---</span></div>
                 <div class="location-item"><span>طول جغرافیایی:</span><span id="longitude-value">---</span></div>
                 <div class="location-item"><span>دقت موقعیت:</span><span id="accuracy-value">---</span></div>
-                <button id="get-location-btn" class="btn-tertiary">دریافت موقعیت</button>
+                <button id="get-location-btn" class="btn btn-tertiary">دریافت موقعیت</button>
             </div>
             <button id="submit-btn" class="submit-btn" disabled>ارسال اطلاعات</button>
             <div id="status-message" class="status-message"></div>
@@ -373,56 +365,54 @@
     </div>
 </div>
 
-<!-- داشبورد کارشناسان - نمای عرضی -->
-<div id="dashboard-page" class="hidden dashboard-container">
-    <button class="back-btn" onclick="showRoleSelection()">بازگشت</button>
+<!-- داشبورد - عرضی -->
+<div id="dashboard-page" class="hidden dashboard-wrapper">
+    <button class="back-btn" onclick="showRoleSelection()">بازگشت به انتخاب نقش</button>
 
-    <div class="main-container">
-        <div class="dashboard-header">
-            <h1>داشبورد کارشناسان فروش</h1>
-        </div>
+    <div class="dashboard-header">
+        <h1>داشبورد کارشناسان فروش</h1>
+    </div>
 
-        <div class="filters">
-            <div class="filter-group">
-                <label for="filter-name">نام پروموتر</label>
-                <i class="fas fa-user"></i>
-                <input type="text" id="filter-name" placeholder="جستجو...">
-            </div>
-            <div class="filter-group">
-                <label for="filter-type">نوع درخواست</label>
-                <i class="fas fa-list-alt"></i>
-                <select id="filter-type">
-                    <option value="">همه</option>
-                    <option value="شروع شیفت">شروع شیفت</option>
-                    <option value="پایان شیفت">پایان شیفت</option>
-                    <option value="ثبت حضور">ثبت حضور</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label for="filter-date">تاریخ درخواست</label>
-                <i class="fas fa-calendar-alt"></i>
-                <input type="date" id="filter-date">
-            </div>
+    <div class="filters">
+        <div class="filter-group">
+            <label for="filter-name">نام پروموتر</label>
+            <i class="fas fa-user"></i>
+            <input type="text" id="filter-name" placeholder="جستجو...">
         </div>
+        <div class="filter-group">
+            <label for="filter-type">نوع درخواست</label>
+            <i class="fas fa-list-alt"></i>
+            <select id="filter-type">
+                <option value="">همه</option>
+                <option value="شروع شیفت">شروع شیفت</option>
+                <option value="پایان شیفت">پایان شیفت</option>
+                <option value="ثبت حضور">ثبت حضور</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="filter-date">تاریخ درخواست</label>
+            <i class="fas fa-calendar-alt"></i>
+            <input type="date" id="filter-date">
+        </div>
+    </div>
 
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>نام پروموتر</th>
-                        <th>تاریخ درخواست</th>
-                        <th>ساعت درخواست</th>
-                        <th>نوع درخواست</th>
-                    </tr>
-                </thead>
-                <tbody id="data-body"></tbody>
-            </table>
-        </div>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>نام پروموتر</th>
+                    <th>تاریخ درخواست</th>
+                    <th>ساعت درخواست</th>
+                    <th>نوع درخواست</th>
+                </tr>
+            </thead>
+            <tbody id="data-body"></tbody>
+        </table>
     </div>
 </div>
 
 <script>
-// ------------------- مدیریت صفحات -------------------
+// مدیریت نمایش صفحات
 function showRoleSelection() {
     document.getElementById('role-selection').classList.remove('hidden');
     document.getElementById('login-page').classList.add('hidden');
@@ -451,7 +441,7 @@ function showDashboardPage() {
 document.getElementById('promoter-role').addEventListener('click', showPromoterPage);
 document.getElementById('expert-role').addEventListener('click', showLoginPage);
 
-// ------------------- لاگین -------------------
+// لاگین
 const users = {
     "admin": "admin",
     "SE": "12345"
@@ -470,7 +460,7 @@ document.getElementById('login-btn').addEventListener('click', () => {
     }
 });
 
-// ------------------- پروموترها (کامل بدون تغییر) -------------------
+// ────────────── کد پروموترها (دقیقاً همان چیزی که فرستادی) ──────────────
 const marketingCodeInput = document.getElementById('marketing-code');
 const marketingCodeError = document.getElementById('marketing-code-error');
 const requestTypeSelect = document.getElementById('request-type');
@@ -486,15 +476,14 @@ const longitudeValue = document.getElementById('longitude-value');
 const accuracyValue = document.getElementById('accuracy-value');
 const getLocationBtn = document.getElementById('get-location-btn');
 const timeRestrictionInfo = document.getElementById('time-restriction');
-const systemDisabledOverlay = document.getElementById('system-disabled-overlay');
+const systemDisabledOverlay= document.getElementById('system-disabled-overlay');
 const systemStatus = document.getElementById('system-status');
 const systemClock = document.getElementById('system-clock');
-
 let locationData = null;
 let spots = [];
 let selectedSpot = null;
 let selectedRequestType = null;
-
+let debounceTimeout;
 const allowedTimeSlots = [
     { start: { h:6, m:0 }, end: { h:6, m:30 } },
     { start: { h:8, m:0 }, end: { h:8, m:30 } },
@@ -511,13 +500,11 @@ function updateClock() {
     const n = new Date();
     systemClock.textContent = `${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}:${n.getSeconds().toString().padStart(2,'0')}`;
 }
-
 function isInDisabledTime() {
     const n = new Date();
     const m = n.getHours() * 60 + n.getMinutes();
     return m >= 30 && m < 330;
 }
-
 function isWithinAllowedTime() {
     const n = new Date();
     const m = n.getHours() * 60 + n.getMinutes();
@@ -528,11 +515,9 @@ function isWithinAllowedTime() {
     }
     return false;
 }
-
 function validateMarketingCode(code) {
     return /^\d{5}$/.test(code);
 }
-
 function calculateDistance(lat1, lon1, lat2, lon2) {
     const R = 6371e3;
     const φ1 = lat1 * Math.PI/180;
@@ -543,7 +528,6 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     return R * c;
 }
-
 async function fetchSpots(code) {
     try {
         const url = `https://script.google.com/macros/s/AKfycbwnHxuCeQrHBVHpT253b23qgG0jtf-_u8JZ4nORAqjBSfnb6rPVJzPTLJblnLtLltOT/exec?code=${code}`;
@@ -568,7 +552,6 @@ async function fetchSpots(code) {
         showStatus('خطا در بارگیری اسپات‌ها', 'error');
     }
 }
-
 function getLocation() {
     if (!navigator.geolocation) {
         showStatus('مرورگر شما موقعیت‌یابی را پشتیبانی نمی‌کند', 'error');
@@ -597,14 +580,12 @@ function getLocation() {
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
 }
-
 function showStatus(msg, cls) {
     statusMessage.textContent = msg;
     statusMessage.className = 'status-message ' + cls;
     statusMessage.style.display = 'block';
     setTimeout(() => { statusMessage.style.display = 'none'; }, 5000);
 }
-
 function validateForm() {
     const code = marketingCodeInput.value.trim();
     const validCode = validateMarketingCode(code);
@@ -612,17 +593,14 @@ function validateForm() {
     const hasType = requestTypeSelect.value !== '';
     const hasSpot = !!selectedSpot;
     const sameType = requestTypeSelect.value === selectedRequestType;
-
     if (code && !validCode) {
         marketingCodeError.textContent = 'کد باید دقیقاً ۵ رقم باشد';
         marketingCodeError.style.display = 'block';
     } else {
         marketingCodeError.style.display = 'none';
     }
-
     submitBtn.disabled = !(validCode && hasLoc && hasType && hasSpot && sameType);
 }
-
 marketingCodeInput.addEventListener('input', function() {
     this.value = this.value.replace(/\D/g,'').slice(0,5);
     const code = this.value.trim();
@@ -631,10 +609,11 @@ marketingCodeInput.addEventListener('input', function() {
     spotGroup.style.display = 'none';
     spotLocation.style.display = 'none';
     spotSelect.innerHTML = '<option value="" disabled selected>نام اسپات را انتخاب کنید</option>';
-    if (validateMarketingCode(code)) fetchSpots(code);
+    if (validateMarketingCode(code)) {
+        fetchSpots(code);
+    }
     validateForm();
 });
-
 requestTypeSelect.addEventListener('change', function() {
     selectedRequestType = this.value;
     locationData = null;
@@ -644,7 +623,6 @@ requestTypeSelect.addEventListener('change', function() {
     timeRestrictionInfo.style.display = (this.value === 'ثبت حضور') ? 'block' : 'none';
     validateForm();
 });
-
 spotSelect.addEventListener('change', function() {
     const idx = this.value;
     selectedSpot = idx ? spots[idx] : null;
@@ -657,9 +635,7 @@ spotSelect.addEventListener('change', function() {
     }
     validateForm();
 });
-
 getLocationBtn.addEventListener('click', getLocation);
-
 submitBtn.addEventListener('click', async () => {
     const code = marketingCodeInput.value.trim();
     if (!validateMarketingCode(code)) return;
@@ -717,10 +693,8 @@ submitBtn.addEventListener('click', async () => {
         submitBtn.disabled = false;
     }
 });
-
 setInterval(updateClock, 1000);
 updateClock();
-
 function checkSystemState() {
     const disabled = isInDisabledTime();
     systemDisabledOverlay.style.display = disabled ? 'flex' : 'none';
@@ -740,7 +714,7 @@ function checkSystemState() {
 checkSystemState();
 setInterval(checkSystemState, 60000);
 
-// ------------------- داشبورد نمونه -------------------
+// ────────────── داشبورد نمونه (برای تست) ──────────────
 const sampleData = [
     { name: "علی محمدی", date: "۱۴۰۴/۱۱/۰۲", time: "۰۸:۱۲:۴۵", type: "ثبت حضور" },
     { name: "سارا احمدی", date: "۱۴۰۴/۱۱/۰۲", time: "۰۶:۱۸:۳۰", type: "شروع شیفت" },
@@ -761,30 +735,19 @@ function renderTable(data) {
             <td>${item.name}</td>
             <td>${item.date}</td>
             <td>${item.time}</td>
-            <td><span class="status-badge status-${item.type.replace(/\s/g, '')}">${item.type}</span></td>
+            <td><span class="status-badge status-${item.type.replace(/\s/g, '_')}">${item.type}</span></td>
         `;
         tbody.appendChild(tr);
     });
 }
 
 function applyFilters() {
-    let filtered = [...sampleData];
-
-    const nameVal = filterName.value.trim().toLowerCase();
-    const typeVal = filterType.value;
-    const dateVal = filterDate.value;
-
-    if (nameVal) {
-        filtered = filtered.filter(item => item.name.toLowerCase().includes(nameVal));
-    }
-    if (typeVal) {
-        filtered = filtered.filter(item => item.type === typeVal);
-    }
-    if (dateVal) {
-        const formattedDate = new Date(dateVal).toLocaleDateString('fa-IR');
-        filtered = filtered.filter(item => item.date === formattedDate);
-    }
-
+    let filtered = sampleData.filter(item => {
+        const nameMatch = !filterName.value.trim() || item.name.toLowerCase().includes(filterName.value.trim().toLowerCase());
+        const typeMatch = !filterType.value || item.type === filterType.value;
+        const dateMatch = !filterDate.value || item.date === new Date(filterDate.value).toLocaleDateString('fa-IR');
+        return nameMatch && typeMatch && dateMatch;
+    });
     renderTable(filtered);
 }
 
