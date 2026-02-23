@@ -20,6 +20,7 @@
         }
         .hidden { display: none !important; }
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap');
+
         /* ────────────── انتخاب نقش ────────────── */
         .role-container {
             max-width: 520px;
@@ -56,6 +57,7 @@
         .role-card i { font-size: 3.2rem; color: #047857; margin-bottom: 16px; }
         .role-card h2 { font-size: 1.35rem; margin: 12px 0 8px; color: #065f46; }
         .role-card p { color: #4b5563; font-size: 0.98rem; }
+
         /* ────────────── لاگین ────────────── */
         .login-container {
             max-width: 480px;
@@ -130,7 +132,6 @@
             text-align: center;
             display: none;
         }
-        /* دکمه بازگشت آیکونی کوچک در هدر */
         .icon-back-btn {
             position: absolute;
             top: 18px;
@@ -153,34 +154,35 @@
             background: rgba(255,255,255,0.35);
             transform: scale(1.08);
         }
+
         /* ────────────── داشبورد ────────────── */
-       .dashboard-wrapper {
-    max-width: 1200px;
-    margin: 40px auto;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
-    overflow: hidden;
-    border: 1px solid #e2e8f0;
-}
-      .dashboard-header {
-    background: linear-gradient(135deg, #047857, #065f46);
-    color: white;
-    padding: 28px 32px;
-    text-align: center;
-}
+        .dashboard-wrapper {
+            max-width: 1400px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .dashboard-header {
+            background: linear-gradient(135deg, #047857, #065f46);
+            color: white;
+            padding: 28px 32px;
+            text-align: center;
+        }
         .dashboard-header h1 { font-size: 1.9rem; margin: 0; }
-       .filters {
-    padding: 24px 32px;
-    background: #f8fafc;
-    border-bottom: 1px solid #e2e8f0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
+        .filters {
+            padding: 24px 32px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
         .filter-group {
             flex: 1;
-            min-width: 220px;
+            min-width: 200px;
             position: relative;
         }
         .filter-group label {
@@ -221,9 +223,10 @@
             z-index: 10;
         }
         th, td {
-            padding: 16px 20px;
+            padding: 14px 16px;
             text-align: right;
             border-bottom: 1px solid #e2e8f0;
+            white-space: nowrap;
         }
         th {
             font-weight: 600;
@@ -233,15 +236,16 @@
             background: #f0fdf4;
         }
         .status-badge {
-            padding: 6px 14px;
+            padding: 6px 12px;
             border-radius: 999px;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             font-weight: 500;
         }
         .status-شروع_شیفت { background: #d1fae5; color: #065f46; }
         .status-پایان_شیفت { background: #fef3c7; color: #92400e; }
         .status-ثبت_حضور { background: #dbeafe; color: #1e40af; }
-        /* ────────────── پروموتر ────────────── */
+
+        /* ────────────── پروموتر (بدون تغییر) ────────────── */
         .promoter-container {
             background: white;
             width: 100%;
@@ -458,6 +462,7 @@
             <h1>سامانه حضور و غیاب</h1>
         </div>
         <div class="promoter-content">
+            <!-- محتوای پروموتر بدون تغییر -->
             <div class="system-status active" id="system-status">
                 <i class="fas fa-clock"></i>
                 <span>ساعت سیستم:</span>
@@ -537,6 +542,24 @@
             <input type="text" id="filter-name" placeholder="جستجو...">
         </div>
         <div class="filter-group">
+            <label for="filter-province">استان</label>
+            <i class="fas fa-map"></i>
+            <select id="filter-province">
+                <option value="">همه استان‌ها</option>
+                <!-- گزینه‌ها را می‌توانید داینامیک پر کنید یا دستی اضافه کنید -->
+                <option value="تهران">تهران</option>
+                <option value="اصفهان">اصفهان</option>
+                <option value="مازندران">مازندران</option>
+                <option value="خراسان رضوی">خراسان رضوی</option>
+                <!-- بقیه استان‌ها را خودتان اضافه کنید یا بعداً داینامیک کنید -->
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="filter-se">کارشناس</label>
+            <i class="fas fa-user-tie"></i>
+            <input type="text" id="filter-se" placeholder="نام کارشناس...">
+        </div>
+        <div class="filter-group">
             <label for="filter-type">نوع درخواست</label>
             <i class="fas fa-list-alt"></i>
             <select id="filter-type">
@@ -557,6 +580,8 @@
             <thead>
                 <tr>
                     <th>نام پروموتر</th>
+                    <th>استان</th>
+                    <th>کارشناس</th>
                     <th>تاریخ درخواست</th>
                     <th>ساعت درخواست</th>
                     <th>نوع درخواست</th>
@@ -592,8 +617,6 @@ function showLoginPage() {
 function showDashboardPage() {
     document.getElementById('login-page').classList.add('hidden');
     document.getElementById('dashboard-page').classList.remove('hidden');
-    
-    // بارگذاری داده‌ها وقتی داشبورد باز می‌شود (فقط اگر هنوز لود نشده باشد)
     if (allData.length === 0) {
         loadDashboardData();
     }
@@ -612,7 +635,6 @@ document.getElementById('login-btn').addEventListener('click', () => {
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value.trim();
     const errorEl = document.getElementById('login-error');
-
     if (users[username] && users[username] === password) {
         showDashboardPage();
     } else {
@@ -621,7 +643,7 @@ document.getElementById('login-btn').addEventListener('click', () => {
     }
 });
 
-// ────────────── کد پروموتر (کامل و بدون تغییر) ──────────────
+// ────────────── بخش پروموتر (بدون تغییر) ──────────────
 const marketingCodeInput = document.getElementById('marketing-code');
 const marketingCodeError = document.getElementById('marketing-code-error');
 const requestTypeSelect = document.getElementById('request-type');
@@ -900,15 +922,17 @@ function checkSystemState() {
 checkSystemState();
 setInterval(checkSystemState, 60000);
 
-// ────────────── داشبورد – فراخوانی واقعی داده‌ها ──────────────
+// ────────────── داشبورد – داده واقعی ──────────────
 
-// !!! اینجا آدرس Web App واقعی خودتان را بگذارید !!!
-const DASHBOARD_API_URL = "https://script.google.com/macros/s/AKfycby96IfCf3zORtNCkgcd3aZ3hoH2nJFqfMX0jDuo75NU2e01hhSHRrUJloSpKwniTpMU2w/exec";
+const DASHBOARD_API_URL = "https://script.google.com/macros/s/AKfycbyoURGM8dTO4TC14sPbz6rnrCufeIewSH0tvYy9tsLlZXy16zuECyxIps2JO9poet_8oQ/exec";
+// ↑↑↑ آدرس واقعی Web App خود را جایگزین کنید ↑↑↑
 
 const tbody = document.getElementById('data-body');
-const filterName = document.getElementById('filter-name');
-const filterType = document.getElementById('filter-type');
-const filterDate = document.getElementById('filter-date');
+const filterName   = document.getElementById('filter-name');
+const filterProvince = document.getElementById('filter-province');
+const filterSE     = document.getElementById('filter-se');
+const filterType   = document.getElementById('filter-type');
+const filterDate   = document.getElementById('filter-date');
 
 let allData = [];
 
@@ -918,7 +942,7 @@ async function loadDashboardData() {
         const json = await res.json();
 
         if (!json.success) {
-            tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#991b1b;">
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#991b1b;">
                 خطا: ${json.message || 'داده دریافت نشد'}</td></tr>`;
             return;
         }
@@ -927,7 +951,7 @@ async function loadDashboardData() {
         applyFilters();
 
     } catch (err) {
-        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#991b1b;">
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#991b1b;">
             خطا در ارتباط با سرور: ${err.message}</td></tr>`;
     }
 }
@@ -935,16 +959,18 @@ async function loadDashboardData() {
 function renderTable(data) {
     tbody.innerHTML = '';
     if (data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#6b7280;">داده‌ای یافت نشد</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#6b7280;">داده‌ای یافت نشد</td></tr>';
         return;
     }
 
     data.forEach(item => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${item.name || '—'}</td>
-            <td>${item.date || '—'}</td>
-            <td>${item.time || '—'}</td>
+            <td>${item.name     || '—'}</td>
+            <td>${item.province || '—'}</td>
+            <td>${item.se       || '—'}</td>
+            <td>${item.date     || '—'}</td>
+            <td>${item.time     || '—'}</td>
             <td><span class="status-badge status-${(item.type || '').replace(/\s/g, '_')}">${item.type || '—'}</span></td>
         `;
         tbody.appendChild(tr);
@@ -953,28 +979,41 @@ function renderTable(data) {
 
 function applyFilters() {
     let filtered = allData.filter(item => {
-        const nameMatch = !filterName.value.trim() || 
+        const nameMatch = !filterName.value.trim() ||
             (item.name || '').toLowerCase().includes(filterName.value.trim().toLowerCase());
-        
-        const typeMatch = !filterType.value || item.type === filterType.value;
-        
+
+        const provinceMatch = !filterProvince.value ||
+            (item.province || '') === filterProvince.value;
+
+        const seMatch = !filterSE.value.trim() ||
+            (item.se || '').toLowerCase().includes(filterSE.value.trim().toLowerCase());
+
+        const typeMatch = !filterType.value ||
+            item.type === filterType.value;
+
         let dateMatch = true;
         if (filterDate.value) {
-            const inputDate = new Date(filterDate.value).toLocaleDateString('fa-IR');
-            dateMatch = (item.date || '') === inputDate;
+            const inputDate = new Date(filterDate.value).toISOString().split('T')[0];
+            const itemDate = item.date instanceof Date
+                ? item.date.toISOString().split('T')[0]
+                : (item.date || '').split('T')[0].split(' ')[0];
+            dateMatch = itemDate === inputDate;
         }
 
-        return nameMatch && typeMatch && dateMatch;
+        return nameMatch && provinceMatch && seMatch && typeMatch && dateMatch;
     });
 
     renderTable(filtered);
 }
 
-filterName.addEventListener('input', applyFilters);
-filterType.addEventListener('change', applyFilters);
-filterDate.addEventListener('change', applyFilters);
+// اتصال رویدادها
+filterName.addEventListener('input',   applyFilters);
+filterProvince.addEventListener('change', applyFilters);
+filterSE.addEventListener('input',     applyFilters);
+filterType.addEventListener('change',  applyFilters);
+filterDate.addEventListener('change',  applyFilters);
 
-// اگر داشبورد از قبل باز بود (برای تست)
+// بارگذاری اولیه در صورت باز بودن داشبورد
 if (!document.getElementById('dashboard-page').classList.contains('hidden')) {
     loadDashboardData();
 }
