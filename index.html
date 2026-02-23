@@ -937,6 +937,8 @@ function applyFilters() {
             (item.se || '').toLowerCase().includes(filterSE.value.trim().toLowerCase());
         const typeMatch = !filterType.value ||
             item.type === filterType.value;
+        console.log("تاریخ ورودی از شیت:", item.date);
+console.log("تاریخ انتخاب‌شده از input:", filterDate.value);
         let dateMatch = true;
         if (filterDate.value) {
             const inputDate = filterDate.value; // مثلاً "2026-02-23"
