@@ -430,7 +430,7 @@
         <div class="input-group">
             <label for="username">نام کاربری</label>
             <i class="fas fa-user"></i>
-            <input type="text" id="username" placeholder="••••••••" autocomplete="off">
+            <input type="text" id="username" placeholder="نام کاربری" autocomplete="off">
         </div>
         <div class="input-group">
             <label for="password">رمز عبور</label>
@@ -613,8 +613,28 @@ document.getElementById('expert-role').addEventListener('click', showLoginPage);
 
 // ────────────── لاگین ──────────────
 const users = {
-    "admin": "admin",
-    "SE": "12345"
+    "admin":        "admin",
+    "Ramezani":     "12345",
+    "Avash":        "12345",
+    "Lotfi":        "12345",
+    "H.Ghaffari":   "12345",
+    "Hajgolestani": "12345",
+    "Sanatipour":   "12345",
+    "Sajad.Ahmadifar": "12345",
+    "Saeed.Ahmadifar": "12345",
+    "Vahidi":       "12345"
+};
+
+const seNameMapping = {
+    "Ramezani":     "حسن رمضانی",
+    "Avash":        "اسماعیل آوش",
+    "Lotfi":        "یعقوب لطفی",
+    "H.Ghaffari":   "محمد هادی غفاری",
+    "Hajgolestani": "محمد حاج گلستانی",
+    "Sanatipour":   "محمد صنعتی پور",
+    "Sajad.Ahmadifar": "سجاد احمدی فر",
+    "Saeed.Ahmadifar": "سعید احمدی فر",
+    "Vahidi":       "آرش وحیدی"
 };
 
 let currentUser = null;
@@ -625,7 +645,7 @@ document.getElementById('login-btn').addEventListener('click', () => {
     const errorEl = document.getElementById('login-error');
 
     if (users[username] && users[username] === password) {
-        currentUser = username.toUpperCase();  // SE یا admin
+        currentUser = username;
         showDashboardPage();
     } else {
         errorEl.textContent = "نام کاربری یا رمز عبور اشتباه است";
@@ -968,14 +988,15 @@ function renderTable(data) {
 function applyFilters() {
     let filtered = allData;
 
-    // فیلتر اجباری برای کاربر SE
-    if (currentUser === "SE") {
+    // فیلتر اجباری بر اساس کاربر لاگین‌شده (فقط داده‌های خودش)
+    if (currentUser && currentUser !== "admin" && seNameMapping[currentUser]) {
+        const allowedSEName = seNameMapping[currentUser];
         filtered = filtered.filter(item => 
-            (item.se || '').trim() === "حسن رمضانی"
+            (item.se || '').trim() === allowedSEName
         );
     }
 
-    // فیلترهای معمولی
+    // اعمال فیلترهای معمولی (فقط برای admin یا وقتی فیلتر اجباری اعمال نشده)
     filtered = filtered.filter(item => {
         const nameMatch = !filterName.value.trim() ||
             (item.name || '').toLowerCase().includes(filterName.value.trim().toLowerCase());
@@ -984,8 +1005,8 @@ function applyFilters() {
             (item.province || '') === filterProvince.value;
 
         let seMatch = true;
-        // فقط وقتی کاربر admin باشد، فیلتر کارشناس فعال است
-        if (currentUser !== "SE") {
+        // فیلتر دستی کارشناس فقط برای admin فعال است
+        if (currentUser === "admin") {
             seMatch = !filterSE.value.trim() ||
                 (item.se || '').toLowerCase().includes(filterSE.value.trim().toLowerCase());
         }
