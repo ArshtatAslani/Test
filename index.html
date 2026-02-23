@@ -21,7 +21,7 @@
 
         .hidden { display: none !important; }
 
-        /* صفحه انتخاب نقش - حرفه‌ای */
+        /* انتخاب نقش */
         .role-container {
             max-width: 520px;
             margin: 40px auto;
@@ -36,19 +36,9 @@
             padding: 32px 24px;
             text-align: center;
         }
-        .role-header h1 {
-            font-size: 1.85rem;
-            font-weight: 600;
-            margin: 0;
-        }
-        .role-header p {
-            margin-top: 8px;
-            opacity: 0.9;
-            font-size: 1.05rem;
-        }
-        .role-content {
-            padding: 32px 28px;
-        }
+        .role-header h1 { font-size: 1.85rem; font-weight: 600; margin: 0; }
+        .role-header p { margin-top: 8px; opacity: 0.9; font-size: 1.05rem; }
+        .role-content { padding: 32px 28px; }
         .role-card {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
@@ -64,25 +54,18 @@
             box-shadow: 0 12px 32px rgba(4,120,87,0.18);
             border-color: #a7f3d0;
         }
-        .role-card i {
-            font-size: 3.2rem;
-            color: #047857;
-            margin-bottom: 16px;
-        }
-        .role-card h2 {
-            font-size: 1.35rem;
-            margin: 12px 0 8px;
-            color: #065f46;
-        }
-        .role-card p {
-            color: #4b5563;
-            font-size: 0.98rem;
-        }
+        .role-card i { font-size: 3.2rem; color: #047857; margin-bottom: 16px; }
+        .role-card h2 { font-size: 1.35rem; margin: 12px 0 8px; color: #065f46; }
+        .role-card p { color: #4b5563; font-size: 0.98rem; }
 
         /* لاگین */
         .login-container {
             max-width: 420px;
             margin: 40px auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
         .login-form .input-group {
             margin-bottom: 24px;
@@ -148,7 +131,7 @@
         }
         .back-btn:hover { background: white; }
 
-        /* داشبورد - نمای عرضی (عرض بیشتر) */
+        /* داشبورد - عرضی */
         .dashboard-wrapper {
             max-width: 1200px;
             margin: 20px auto;
@@ -160,10 +143,7 @@
             text-align: center;
             border-radius: 16px 16px 0 0;
         }
-        .dashboard-header h1 {
-            font-size: 1.9rem;
-            margin: 0;
-        }
+        .dashboard-header h1 { font-size: 1.9rem; margin: 0; }
         .filters {
             padding: 24px 32px;
             background: #f8fafc;
@@ -237,16 +217,166 @@
         .status-پایان_شیفت  { background: #fef3c7; color: #92400e; }
         .status-ثبت_حضور   { background: #dbeafe; color: #1e40af; }
 
-        @media (max-width: 768px) {
-            .filters { flex-direction: column; }
-            .dashboard-wrapper { margin: 16px; }
-            .table-wrapper { margin: 0 16px 24px; }
+        /* استایل‌های اصلی پروموتر (کپی دقیق) */
+        .promoter-container {
+            background: white;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .promoter-header {
+            background: #047857;
+            color: white;
+            text-align: center;
+            padding: 20px 16px;
+        }
+        .promoter-header h1 { font-size: 1.6rem; }
+        .promoter-content { padding: 20px; }
+        .system-status {
+            padding: 10px 12px;
+            margin-bottom: 16px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .system-status.active { background: #ecfdf5; color: #065f46; }
+        .system-status.inactive { background: #fef2f2; color: #991b1b; }
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #065f46;
+        }
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 12px 12px 12px 44px;
+            border: 1px solid #a7f3d0;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: #047857;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(4,120,87,0.15);
+        }
+        .input-group i {
+            position: absolute;
+            left: 14px;
+            top: 38px;
+            color: #047857;
+            font-size: 18px;
+        }
+        .select-arrow {
+            position: absolute;
+            right: 14px;
+            top: 38px;
+            color: #065f46;
+            pointer-events: none;
+        }
+        .btn-tertiary {
+            background: #10b981;
+            color: white;
+            width: 100%;
+            margin-top: 12px;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: #047857;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+        .submit-btn:disabled { background: #a7f3d0; }
+        .status-message {
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 16px;
+            text-align: center;
+            display: none;
+        }
+        .success { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+        .error { background: #fee2e2; color: #991b1b; }
+        .processing { background: #ecfdf5; color: #065f46; }
+        .time-restriction-info {
+            background: #ecfdf5;
+            border-right: 4px solid #047857;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 12px 0;
+            font-size: 14px;
+            display: none;
+        }
+        .system-disabled-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(240,253,244,0.94);
+            z-index: 100;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        .spot-location {
+            background: #ecfdf5;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 12px 0;
+            text-align: center;
+            display: none;
+        }
+        .marketing-code-error {
+            color: #dc2626;
+            font-size: 13px;
+            margin-top: 4px;
+            display: none;
+        }
+        .location-section {
+            background: #f0fdf4;
+            padding: 16px;
+            border-radius: 10px;
+            margin: 16px 0;
+        }
+        .location-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #a7f3d0;
+        }
+        .location-item:last-child { border-bottom: none; }
+
+        @media (max-width: 480px) {
+            .promoter-content { padding: 16px; }
+            .promoter-header h1 { font-size: 1.4rem; }
         }
     </style>
 </head>
 <body>
 
-<!-- صفحه انتخاب نقش -->
+<!-- انتخاب نقش -->
 <div id="role-selection" class="role-container">
     <div class="role-header">
         <h1>سامانه حضور و غیاب</h1>
@@ -266,7 +396,7 @@
     </div>
 </div>
 
-<!-- صفحه لاگین کارشناسان -->
+<!-- لاگین کارشناسان -->
 <div id="login-page" class="login-container hidden">
     <button class="back-btn" onclick="showRoleSelection()">بازگشت</button>
     <div class="header">
@@ -288,19 +418,19 @@
     </div>
 </div>
 
-<!-- صفحه پروموترها - دقیقاً همان کد شما بدون هیچ تغییری -->
+<!-- پروموتر - دقیقاً همان کد شما -->
 <div id="promoter-page" class="hidden">
     <button class="back-btn" onclick="showRoleSelection()">بازگشت به انتخاب نقش</button>
 
-    <div class="container">
+    <div class="promoter-container">
         <div class="system-disabled-overlay" id="system-disabled-overlay">
             <i class="fas fa-power-off fa-3x" style="color:#991b1b; margin-bottom:16px;"></i>
             <p style="font-size:1.1rem; font-weight:600;">سامانه از ساعت ۰۰:۳۰ تا ۰۵:۳۰ غیرفعال است</p>
         </div>
-        <div class="header">
+        <div class="promoter-header">
             <h1>سامانه حضور و غیاب</h1>
         </div>
-        <div class="content">
+        <div class="promoter-content">
             <div class="system-status active" id="system-status">
                 <i class="fas fa-clock"></i>
                 <span>ساعت سیستم:</span>
@@ -365,7 +495,7 @@
     </div>
 </div>
 
-<!-- داشبورد - عرضی -->
+<!-- داشبورد -->
 <div id="dashboard-page" class="hidden dashboard-wrapper">
     <button class="back-btn" onclick="showRoleSelection()">بازگشت به انتخاب نقش</button>
 
@@ -412,7 +542,7 @@
 </div>
 
 <script>
-// مدیریت نمایش صفحات
+// مدیریت صفحات
 function showRoleSelection() {
     document.getElementById('role-selection').classList.remove('hidden');
     document.getElementById('login-page').classList.add('hidden');
@@ -460,7 +590,7 @@ document.getElementById('login-btn').addEventListener('click', () => {
     }
 });
 
-// ────────────── کد پروموترها (دقیقاً همان چیزی که فرستادی) ──────────────
+// کد پروموتر شما - بدون کوچک‌ترین تغییر
 const marketingCodeInput = document.getElementById('marketing-code');
 const marketingCodeError = document.getElementById('marketing-code-error');
 const requestTypeSelect = document.getElementById('request-type');
@@ -714,12 +844,11 @@ function checkSystemState() {
 checkSystemState();
 setInterval(checkSystemState, 60000);
 
-// ────────────── داشبورد نمونه (برای تست) ──────────────
+// داشبورد نمونه
 const sampleData = [
     { name: "علی محمدی", date: "۱۴۰۴/۱۱/۰۲", time: "۰۸:۱۲:۴۵", type: "ثبت حضور" },
     { name: "سارا احمدی", date: "۱۴۰۴/۱۱/۰۲", time: "۰۶:۱۸:۳۰", type: "شروع شیفت" },
     { name: "محمد رضایی", date: "۱۴۰۴/۱۱/۰۱", time: "۲۰:۴۵:۱۲", type: "پایان شیفت" },
-    { name: "زهرا کریمی", date: "۱۴۰۴/۱۱/۰۲", time: "۱۲:۰۵:۲۲", type: "ثبت حضور" },
 ];
 
 const tbody = document.getElementById('data-body');
