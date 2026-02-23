@@ -538,12 +538,10 @@
             <i class="fas fa-map"></i>
             <select id="filter-province">
                 <option value="">همه استان‌ها</option>
-                <!-- گزینه‌ها را می‌توانید داینامیک پر کنید یا دستی اضافه کنید -->
                 <option value="MAZ">MAZ</option>
                 <option value="GIL">GIL</option>
                 <option value="GOL">GOL</option>
                 <option value="KHS">KHS</option>
-                <!-- بقیه استان‌ها را خودتان اضافه کنید یا بعداً داینامیک کنید -->
             </select>
         </div>
         <div class="filter-group">
@@ -612,6 +610,7 @@ function showDashboardPage() {
 }
 document.getElementById('promoter-role').addEventListener('click', showPromoterPage);
 document.getElementById('expert-role').addEventListener('click', showLoginPage);
+
 // ────────────── لاگین ──────────────
 const users = {
     "admin": "admin",
@@ -628,6 +627,7 @@ document.getElementById('login-btn').addEventListener('click', () => {
         errorEl.style.display = 'block';
     }
 });
+
 // ────────────── بخش پروموتر (بدون تغییر) ──────────────
 const marketingCodeInput = document.getElementById('marketing-code');
 const marketingCodeError = document.getElementById('marketing-code-error');
@@ -662,15 +662,18 @@ const allowedTimeSlots = [
     { start: { h:20, m:0 }, end: { h:20,m:30 } },
     { start: { h:22, m:0 }, end: { h:22,m:30 } }
 ];
+
 function updateClock() {
     const n = new Date();
     systemClock.textContent = `${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}:${n.getSeconds().toString().padStart(2,'0')}`;
 }
+
 function isInDisabledTime() {
     const n = new Date();
     const m = n.getHours() * 60 + n.getMinutes();
     return m >= 30 && m < 330;
 }
+
 function isWithinAllowedTime() {
     const n = new Date();
     const m = n.getHours() * 60 + n.getMinutes();
@@ -681,9 +684,11 @@ function isWithinAllowedTime() {
     }
     return false;
 }
+
 function validateMarketingCode(code) {
     return /^\d{5}$/.test(code);
 }
+
 function calculateDistance(lat1, lon1, lat2, lon2) {
     const R = 6371e3;
     const φ1 = lat1 * Math.PI/180;
@@ -694,6 +699,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     return R * c;
 }
+
 async function fetchSpots(code) {
     try {
         const url = `https://script.google.com/macros/s/AKfycbwnHxuCeQrHBVHpT253b23qgG0jtf-_u8JZ4nORAqjBSfnb6rPVJzPTLJblnLtLltOT/exec?code=${code}`;
@@ -718,6 +724,7 @@ async function fetchSpots(code) {
         showStatus('خطا در بارگیری اسپات‌ها', 'error');
     }
 }
+
 function getLocation() {
     if (!navigator.geolocation) {
         showStatus('مرورگر شما موقعیت‌یابی را پشتیبانی نمی‌کند', 'error');
@@ -746,12 +753,14 @@ function getLocation() {
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
 }
+
 function showStatus(msg, cls) {
     statusMessage.textContent = msg;
     statusMessage.className = 'status-message ' + cls;
     statusMessage.style.display = 'block';
     setTimeout(() => { statusMessage.style.display = 'none'; }, 5000);
 }
+
 function validateForm() {
     const code = marketingCodeInput.value.trim();
     const validCode = validateMarketingCode(code);
@@ -767,6 +776,7 @@ function validateForm() {
     }
     submitBtn.disabled = !(validCode && hasLoc && hasType && hasSpot && sameType);
 }
+
 marketingCodeInput.addEventListener('input', function() {
     this.value = this.value.replace(/\D/g,'').slice(0,5);
     const code = this.value.trim();
@@ -780,6 +790,7 @@ marketingCodeInput.addEventListener('input', function() {
     }
     validateForm();
 });
+
 requestTypeSelect.addEventListener('change', function() {
     selectedRequestType = this.value;
     locationData = null;
@@ -789,6 +800,7 @@ requestTypeSelect.addEventListener('change', function() {
     timeRestrictionInfo.style.display = (this.value === 'ثبت حضور') ? 'block' : 'none';
     validateForm();
 });
+
 spotSelect.addEventListener('change', function() {
     const idx = this.value;
     selectedSpot = idx ? spots[idx] : null;
@@ -801,7 +813,9 @@ spotSelect.addEventListener('change', function() {
     }
     validateForm();
 });
+
 getLocationBtn.addEventListener('click', getLocation);
+
 submitBtn.addEventListener('click', async () => {
     const code = marketingCodeInput.value.trim();
     if (!validateMarketingCode(code)) return;
@@ -859,8 +873,10 @@ submitBtn.addEventListener('click', async () => {
         submitBtn.disabled = false;
     }
 });
+
 setInterval(updateClock, 1000);
 updateClock();
+
 function checkSystemState() {
     const disabled = isInDisabledTime();
     systemDisabledOverlay.style.display = disabled ? 'flex' : 'none';
@@ -879,9 +895,10 @@ function checkSystemState() {
 }
 checkSystemState();
 setInterval(checkSystemState, 60000);
+
 // ────────────── داشبورد – داده واقعی ──────────────
 const DASHBOARD_API_URL = "https://script.google.com/macros/s/AKfycbygzM1MLDxIvapxUoWxWq4ZIlkJm9SubQ5eG7_LFNnSf1tbgmQdsPX3gRnaar55pNEtZA/exec";
-// ↑↑↑ آدرس واقعی Web App خود را جایگزین کنید ↑↑↑
+
 const tbody = document.getElementById('data-body');
 const filterName = document.getElementById('filter-name');
 const filterProvince = document.getElementById('filter-province');
@@ -915,28 +932,11 @@ function renderTable(data) {
     }
 
     data.forEach(item => {
-        // ── اصلاح اصلی: نمایش تاریخ به صورت میلادی خوانا ──
-        let displayDate = '—';
-        if (item.date) {
-            let d;
-            // فرمت‌های رایج ممکن از گوگل شیت / Apps Script
-            if (typeof item.date === 'string') {
-                // 2/23/2026  یا 2026-02-23  یا 2026/02/23
-                const cleaned = item.date.trim().replace(/\//g, '-');
-                d = new Date(cleaned);
-            } else if (item.date instanceof Date) {
-                d = item.date;
-            }
-
-            if (d && !isNaN(d.getTime())) {
-                // نمایش به صورت YYYY-MM-DD (میلادی استاندارد و مرتب)
-                displayDate = d.getFullYear() + '-' +
-                              String(d.getMonth() + 1).padStart(2, '0') + '-' +
-                              String(d.getDate()).padStart(2, '0');
-            } else {
-                // اگر نشد، همان رشته خام (احتیاط)
-                displayDate = item.date;
-            }
+        // اصلاح نمایش تاریخ → فرمت میلادی خوانا (YYYY-MM-DD)
+        let displayDate = item.date || '—';
+        if (displayDate && displayDate.includes('-')) {
+            // اگر تاریخ به صورت ISO یا مشابه است → فقط YYYY-MM-DD نگه می‌داریم
+            displayDate = displayDate.split('T')[0].split(' ')[0];
         }
 
         const tr = document.createElement('tr');
@@ -962,24 +962,17 @@ function applyFilters() {
             (item.se || '').toLowerCase().includes(filterSE.value.trim().toLowerCase());
         const typeMatch = !filterType.value ||
             item.type === filterType.value;
+
         let dateMatch = true;
         if (filterDate.value) {
             const inputDate = filterDate.value; // yyyy-mm-dd از input type=date
-            let itemDateStr;
-            if (item.date) {
-                let d = new Date(item.date);
-                if (!isNaN(d.getTime())) {
-                    itemDateStr = d.getFullYear() + '-' +
-                                  String(d.getMonth() + 1).padStart(2, '0') + '-' +
-                                  String(d.getDate()).padStart(2, '0');
-                } else {
-                    itemDateStr = String(item.date).trim();
-                }
-            }
+            let itemDateStr = (item.date || '').split('T')[0].split(' ')[0];
             dateMatch = itemDateStr === inputDate;
         }
+
         return nameMatch && provinceMatch && seMatch && typeMatch && dateMatch;
     });
+
     renderTable(filtered);
 }
 
