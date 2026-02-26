@@ -610,40 +610,35 @@ function showDashboardPage() {
 }
 document.getElementById('promoter-role').addEventListener('click', showPromoterPage);
 document.getElementById('expert-role').addEventListener('click', showLoginPage);
-
 // ────────────── لاگین ──────────────
 const users = {
-    "admin":        "SnappNorthZone",
-    "Ramezani":     "Ramezani4209",
-    "Avash":        "Avash4260",
-    "Lotfi":        "Lotfi2185",
-    "H.Ghaffari":   "H.Ghaffari2539",
+    "admin": "SnappNorthZone",
+    "Ramezani": "Ramezani4209",
+    "Avash": "Avash4260",
+    "Lotfi": "Lotfi2185",
+    "H.Ghaffari": "H.Ghaffari2539",
     "Hajgolestani": "Hajgolestani2640",
-    "Sanatipour":   "Sanatipour3473",
+    "Sanatipour": "Sanatipour3473",
     "Sajad.Ahmadifar": "Sajad.Ahmadifar8109",
     "Saeed.Ahmadifar": "Saeed.Ahmadifar1886",
-    "Vahidi":       "Vahidi2753"
+    "Vahidi": "Vahidi2753"
 };
-
 const seNameMapping = {
-    "Ramezani":     "حسن رمضانی",
-    "Avash":        "اسماعیل آوش",
-    "Lotfi":        "یعقوب لطفی",
-    "H.Ghaffari":   "محمد هادی غفاری",
+    "Ramezani": "حسن رمضانی",
+    "Avash": "اسماعیل آوش",
+    "Lotfi": "یعقوب لطفی",
+    "H.Ghaffari": "محمد هادی غفاری",
     "Hajgolestani": "محمد حاج گلستانی",
-    "Sanatipour":   "محمد صنعتی پور",
+    "Sanatipour": "محمد صنعتی پور",
     "Sajad.Ahmadifar": "سجاد احمدی فر",
     "Saeed.Ahmadifar": "سعید احمدی فر",
-    "Vahidi":       "آرش وحیدی"
+    "Vahidi": "آرش وحیدی"
 };
-
 let currentUser = null;
-
 document.getElementById('login-btn').addEventListener('click', () => {
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value.trim();
     const errorEl = document.getElementById('login-error');
-
     if (users[username] && users[username] === password) {
         currentUser = username;
         showDashboardPage();
@@ -652,7 +647,6 @@ document.getElementById('login-btn').addEventListener('click', () => {
         errorEl.style.display = 'block';
     }
 });
-
 // ────────────── بخش پروموتر (بدون تغییر) ──────────────
 const marketingCodeInput = document.getElementById('marketing-code');
 const marketingCodeError = document.getElementById('marketing-code-error');
@@ -672,12 +666,10 @@ const timeRestrictionInfo = document.getElementById('time-restriction');
 const systemDisabledOverlay = document.getElementById('system-disabled-overlay');
 const systemStatus = document.getElementById('system-status');
 const systemClock = document.getElementById('system-clock');
-
 let locationData = null;
 let spots = [];
 let selectedSpot = null;
 let selectedRequestType = null;
-
 const allowedTimeSlots = [
     { start: { h:6, m:0 }, end: { h:6, m:30 } },
     { start: { h:8, m:0 }, end: { h:8, m:30 } },
@@ -689,18 +681,15 @@ const allowedTimeSlots = [
     { start: { h:20, m:0 }, end: { h:20,m:30 } },
     { start: { h:22, m:0 }, end: { h:22,m:30 } }
 ];
-
 function updateClock() {
     const n = new Date();
     systemClock.textContent = `${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}:${n.getSeconds().toString().padStart(2,'0')}`;
 }
-
 function isInDisabledTime() {
     const n = new Date();
     const m = n.getHours() * 60 + n.getMinutes();
     return m >= 30 && m < 330;
 }
-
 function isWithinAllowedTime() {
     const n = new Date();
     const m = n.getHours() * 60 + n.getMinutes();
@@ -711,11 +700,9 @@ function isWithinAllowedTime() {
     }
     return false;
 }
-
 function validateMarketingCode(code) {
     return /^\d{5}$/.test(code);
 }
-
 function calculateDistance(lat1, lon1, lat2, lon2) {
     const R = 6371e3;
     const φ1 = lat1 * Math.PI/180;
@@ -726,7 +713,6 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     return R * c;
 }
-
 async function fetchSpots(code) {
     try {
         const url = `https://script.google.com/macros/s/AKfycbwnHxuCeQrHBVHpT253b23qgG0jtf-_u8JZ4nORAqjBSfnb6rPVJzPTLJblnLtLltOT/exec?code=${code}`;
@@ -751,7 +737,6 @@ async function fetchSpots(code) {
         showStatus('خطا در بارگیری اسپات‌ها', 'error');
     }
 }
-
 function getLocation() {
     if (!navigator.geolocation) {
         showStatus('مرورگر شما موقعیت‌یابی را پشتیبانی نمی‌کند', 'error');
@@ -780,14 +765,12 @@ function getLocation() {
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
 }
-
 function showStatus(msg, cls) {
     statusMessage.textContent = msg;
     statusMessage.className = 'status-message ' + cls;
     statusMessage.style.display = 'block';
     setTimeout(() => { statusMessage.style.display = 'none'; }, 5000);
 }
-
 function validateForm() {
     const code = marketingCodeInput.value.trim();
     const validCode = validateMarketingCode(code);
@@ -795,17 +778,14 @@ function validateForm() {
     const hasType = requestTypeSelect.value !== '';
     const hasSpot = !!selectedSpot;
     const sameType = requestTypeSelect.value === selectedRequestType;
-
     if (code && !validCode) {
         marketingCodeError.textContent = 'کد باید دقیقاً ۵ رقم باشد';
         marketingCodeError.style.display = 'block';
     } else {
         marketingCodeError.style.display = 'none';
     }
-
     submitBtn.disabled = !(validCode && hasLoc && hasType && hasSpot && sameType);
 }
-
 marketingCodeInput.addEventListener('input', function() {
     this.value = this.value.replace(/\D/g,'').slice(0,5);
     const code = this.value.trim();
@@ -819,7 +799,6 @@ marketingCodeInput.addEventListener('input', function() {
     }
     validateForm();
 });
-
 requestTypeSelect.addEventListener('change', function() {
     selectedRequestType = this.value;
     locationData = null;
@@ -829,7 +808,6 @@ requestTypeSelect.addEventListener('change', function() {
     timeRestrictionInfo.style.display = (this.value === 'ثبت حضور') ? 'block' : 'none';
     validateForm();
 });
-
 spotSelect.addEventListener('change', function() {
     const idx = this.value;
     selectedSpot = idx ? spots[idx] : null;
@@ -842,9 +820,9 @@ spotSelect.addEventListener('change', function() {
     }
     validateForm();
 });
-
 getLocationBtn.addEventListener('click', getLocation);
 
+// ────────────── بخش اصلاح‌شده ارسال ──────────────
 submitBtn.addEventListener('click', async () => {
     const code = marketingCodeInput.value.trim();
     if (!validateMarketingCode(code)) return;
@@ -886,7 +864,14 @@ submitBtn.addEventListener('click', async () => {
         data.append('entry.1995166577', locationData.accuracy);
         data.append('entry.1723693542', requestTypeSelect.value);
 
-        await fetch(formUrl, { method: 'POST', body: data, mode: 'no-cors' });
+        const response = await fetch(formUrl, {
+            method: 'POST',
+            body: data
+            // mode: 'no-cors'  ← حذف شده
+        });
+
+        // گوگل فرم معمولاً ریدایرکت می‌دهد → اگر به اینجا رسید → احتمالاً موفق بوده
+        console.log("ارسال انجام شد - وضعیت:", response.status, response.redirected);
 
         showStatus('اطلاعات با موفقیت ثبت شد', 'success');
 
@@ -904,19 +889,19 @@ submitBtn.addEventListener('click', async () => {
         }, 1800);
 
     } catch (err) {
+        console.error("خطای fetch:", err);
         showStatus('خطا در ارسال: ' + err.message, 'error');
         submitBtn.disabled = false;
     }
 });
+// ────────────────────────────────────────────────
 
 setInterval(updateClock, 1000);
 updateClock();
-
 function checkSystemState() {
     const disabled = isInDisabledTime();
     systemDisabledOverlay.style.display = disabled ? 'flex' : 'none';
     systemStatus.className = 'system-status ' + (disabled ? 'inactive' : 'active');
-
     if (disabled) {
         marketingCodeInput.disabled = true;
         requestTypeSelect.disabled = true;
@@ -929,10 +914,8 @@ function checkSystemState() {
         validateForm();
     }
 }
-
 checkSystemState();
 setInterval(checkSystemState, 60000);
-
 // ────────────── داشبورد – داده واقعی ──────────────
 const DASHBOARD_API_URL = "https://script.google.com/macros/s/AKfycbxN43N0Z7gEn_pStSJGEalrmz3oPrMqa2C8EQBGx32rQuSDDJ5Bqe5zAsEwLqsviU1e/exec";
 const tbody = document.getElementById('data-body');
@@ -941,9 +924,7 @@ const filterProvince = document.getElementById('filter-province');
 const filterSE = document.getElementById('filter-se');
 const filterType = document.getElementById('filter-type');
 const filterDate = document.getElementById('filter-date');
-
 let allData = [];
-
 async function loadDashboardData() {
     try {
         const res = await fetch(DASHBOARD_API_URL);
@@ -960,7 +941,6 @@ async function loadDashboardData() {
             خطا در ارتباط با سرور: ${err.message}</td></tr>`;
     }
 }
-
 function renderTable(data) {
     tbody.innerHTML = '';
     if (data.length === 0) {
@@ -984,64 +964,51 @@ function renderTable(data) {
         tbody.appendChild(tr);
     });
 }
-
 function applyFilters() {
     let filtered = allData;
-
     // فیلتر اجباری بر اساس کاربر لاگین‌شده (فقط داده‌های خودش)
     if (currentUser && currentUser !== "admin" && seNameMapping[currentUser]) {
         const allowedSEName = seNameMapping[currentUser];
-        filtered = filtered.filter(item => 
+        filtered = filtered.filter(item =>
             (item.se || '').trim() === allowedSEName
         );
     }
-
     // اعمال فیلترهای معمولی (فقط برای admin یا وقتی فیلتر اجباری اعمال نشده)
     filtered = filtered.filter(item => {
         const nameMatch = !filterName.value.trim() ||
             (item.name || '').toLowerCase().includes(filterName.value.trim().toLowerCase());
-
         const provinceMatch = !filterProvince.value ||
             (item.province || '') === filterProvince.value;
-
         let seMatch = true;
         // فیلتر دستی کارشناس فقط برای admin فعال است
         if (currentUser === "admin") {
             seMatch = !filterSE.value.trim() ||
                 (item.se || '').toLowerCase().includes(filterSE.value.trim().toLowerCase());
         }
-
         const typeMatch = !filterType.value ||
             item.type === filterType.value;
-
         let dateMatch = true;
         if (filterDate.value) {
             const inputDate = filterDate.value;
             let itemDate = (item.date || '').trim();
-
             if (itemDate.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) {
                 const [m, d, y] = itemDate.split('/');
                 const mm = m.padStart(2, '0');
                 const dd = d.padStart(2, '0');
                 itemDate = `${y}-${mm}-${dd}`;
             }
-
             dateMatch = itemDate === inputDate;
         }
-
         return nameMatch && provinceMatch && seMatch && typeMatch && dateMatch;
     });
-
     renderTable(filtered);
 }
-
 // اتصال رویدادها
 filterName.addEventListener('input', applyFilters);
 filterProvince.addEventListener('change', applyFilters);
 filterSE.addEventListener('input', applyFilters);
 filterType.addEventListener('change', applyFilters);
 filterDate.addEventListener('change', applyFilters);
-
 // بارگذاری اولیه در صورت باز بودن داشبورد
 if (!document.getElementById('dashboard-page').classList.contains('hidden')) {
     loadDashboardData();
